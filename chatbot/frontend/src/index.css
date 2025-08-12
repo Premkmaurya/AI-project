@@ -1,0 +1,119 @@
+*{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.chat-container {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1a1a;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #242424;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  padding: 12px 18px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  max-width: 70%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+}
+
+/* User messages - right side */
+.user-message {
+  background-color: #0060df;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+
+/* Other person's messages - left side */
+.other-message {
+  background-color: #2d2d2d;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.message-content {
+  margin-bottom: 5px;
+}
+
+.message-time {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: right;
+}
+
+.chat-input {
+  display: flex;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-top: 1px solid #333;
+}
+
+.chat-input input {
+  flex-grow: 1;
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  margin-right: 12px;
+  font-size: 1rem;
+  background-color: #2d2d2d;
+  color: #ffffff;
+}
+
+.chat-input input::placeholder {
+  color: #808080;
+}
+
+.chat-input button {
+  padding: 12px 24px;
+  background-color: #0060df;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.chat-input button:hover {
+  background-color: #0050bc;
+}
+
+/* Scrollbar styles */
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: #242424;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Reset default margins */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a;
+}
+
+* {
+  box-sizing: border-box;
+}
