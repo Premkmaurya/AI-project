@@ -17,9 +17,9 @@ async function createMemory({vectors,metadata,messageId}){
 async function queryMemory({queryVector,limit=5,metadata}) {
   const data = await chatGptIndex.query({
       vector:queryVector,
-      topk:limit,
-      filter:metadata?metadata:undefined,
-      inclueMetadata:true
+      topK:limit,
+      filter:(metadata && Object.keys(metadata).length > 0) ? metadata : undefined,
+      includeMetadata:true
     })
   return data.matches
 }
