@@ -2,8 +2,9 @@ const {Server} = require('socket.io');
 const cookie = require('cookie');
 const jwt = require('jsonwebtoken');
 const userModel = require('../models/user.model')
-const generateResponse = require('../services/ai.service')
+const {generateResponse,createVector} = require('../services/ai.service')
 const messageModel = require('../models/message.model')
+const {createMemory,queryMemory} =require('../services/vector.service')
 
 function setupSocketServer(httpServer) {
 	const io = new Server(httpServer,{});
@@ -33,11 +34,29 @@ function setupSocketServer(httpServer) {
 
 		socket.on('ai-message',async(messagePayload)=>{
 			
-            await messageModel.create({
+            const userMessage = await messageModel.create({
             	chat:messagePayload.chatId,
             	user:socket.user._id,
             	content:messagePayload.content,
             	role:"user"
+            })
+
+            const vectors = await createVector(messagePayload.content)
+
+            await createMemory({
+            	messageId:userMessage._id,
+            	vectors,
+            	metadata:{
+            		chat:messagePayload.chatId,
+            		user:socket.user._id,
+            		text:messagePayload.content
+            	}
+            })
+            
+            await queryMemory({
+            	vectors,
+            	limit:3,
+            	metadata:{}
             })
 
             const chatHistory = (await messageModel.find({
@@ -56,13 +75,25 @@ function setupSocketServer(httpServer) {
                content:response,
                chatId:messagePayload.chatId
 			})
-
-			await messageModel.create({
+			const responseMessage = await messageModel.create({
             	chat:messagePayload.chatId,
             	user:socket.user._id,
             	content:response,
             	role:"model"
             })
+
+			const responseVector = await createVector(response)
+			await createMemory({
+				vectors:responseVector,
+				messageId:responseMessage._id,
+				metadata:{
+					chat:messagePayload.chatId,
+					user:socket.user._id,
+					text:response
+				}
+			})
+
+			
 
 		})
 
