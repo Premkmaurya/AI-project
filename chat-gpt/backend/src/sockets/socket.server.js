@@ -17,7 +17,7 @@ function setupSocketServer(httpServer) {
     io.use( async (socket,next)=>{
     	const getToken = cookie.parse(socket.handshake.headers.cookie || '')
     	if (!getToken.token) {
-    		return new Error('unautharised.')
+    		return next(new Error('unautharised.'))
     	}
 
     	try{

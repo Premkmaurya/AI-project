@@ -8,7 +8,6 @@ const createChat = async (req,res)=>{
          title:title,
          user:user._id
        })
-       console.log(chat)
        res.status(201).json({
         message:'chat created successfully.',
         chat:{
@@ -18,5 +17,24 @@ const createChat = async (req,res)=>{
        })
 
 }
+const getChat = async (req,res)=>{
+       const user= req.user;
 
-module.exports = createChat;
+       const chat = await chatModel.find({
+         user:user._id
+       })
+       console.log(chat)
+       res.status(201).json({
+        message:'chat find successfully.',
+        chat:{
+          title:[...chat],
+          id:chat._id
+        }
+       })
+
+}
+
+module.exports = {
+  createChat,
+  getChat
+};

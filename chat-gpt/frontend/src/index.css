@@ -15,3 +15,6 @@
 .chat-box::-webkit-scrollbar-thumb:hover {
   background: rgb(179, 178, 178)030;
 }
+.active{
+  background-color: #303030;
+}

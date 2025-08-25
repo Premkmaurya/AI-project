@@ -32,11 +32,35 @@ export default function App() {
   const [socket, setSocket] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
   const [chats, setChats] = useState([]);
+  const [active, setActive] = useState(false)
+
   const [messages, setMessages] = useState([
     { text: "Hello! How can I help you?", sender: "ai" },
   ]);
 
   useEffect(() => {
+    const fetchChats = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/chat", {
+          withCredentials: true,
+        });
+        const chats = (response.data.chat.title).reverse();
+        const chatData = chats.map(item=>{
+              return {
+                id:item._id,
+                title:item.title
+              }
+        })
+       chatData.forEach(item=>{
+          setChats((prev) => [...prev, { id:item.id, name: item.title }]);
+          console.log(chats)
+        })
+      } catch (error) {
+        console.error("Error fetching chats:", error);
+      }
+    };
+
+    fetchChats();
     const socketInstance = io("http://localhost:3000", {
       withCredentials: true,
     });
@@ -116,13 +140,14 @@ export default function App() {
       } catch (err) {
         console.log(err);
       }
+
     } else {
       alert("enter your chat name please.");
     }
 
     chatBoxRef.current.style.display = "none";
     [sideBarRef, sendBtnRef, plusRef, inputRef].forEach(
-      (item) => (item.current.disabled = false)
+      item => item.current.disabled = false
     );
     containerRef.current.style.pointerEvent = "default";
     containerRef.current.style.filter = "blur(0px)";
@@ -130,7 +155,7 @@ export default function App() {
   const closeBtnHandler = () => {
     chatBoxRef.current.style.display = "none";
     [sideBarRef, sendBtnRef, plusRef, inputRef].forEach(
-      (item) => (item.current.disabled = false)
+      item => item.current.disabled = false
     );
     containerRef.current.style.pointerEvents = "default";
     containerRef.current.style.filter = "blur(0px)";
@@ -157,12 +182,17 @@ export default function App() {
     }
   };
 
+  useEffect(() => {
+    if (messageRef.current) {
+      messageRef.current.scrollTop = messageRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   return (
     <>
       <div
         ref={chatBoxRef}
-        className="hidden absolute z-3 text-white flex flex-col items-center rounded-lg px-4 py-2 bg-[#303030] top-[30%] left-[35%] translate-[-35%,-30%] w-[35%] h-[34%]"
-      >
+        className="hidden absolute z-3 text-white flex flex-col items-center rounded-lg px-4 py-2 bg-[#303030] top-[30%] left-[35%] translate-[-35%,-30%] w-[35%] h-[34%]">
         <span
           onClick={closeBtnHandler}
           className="absolute text-white w-7 flex justify-center items-center rounded-full h-7 bg-[#303030] -right-8 -top-4"
@@ -208,7 +238,8 @@ export default function App() {
             {chats.map((chat) => (
               <li
                 key={chat.id}
-                className="p-2 rounded-md cursor-pointer hover:bg-[#303030]"
+                className={`p-2 rounded-md cursor-pointer hover:bg-[#303030] ${active ? 'active' : ''}`}
+                onClick={()=>setActive(true)}
               >
                 {chat.name}
               </li>
@@ -237,7 +268,7 @@ export default function App() {
               <div
                 key={msg.id}
                 className={`flex  ${
-                  msg.sender === "user" ? "justify-end" : "justify-start w-full"
+                  msg.sender === "user" ? "justify-end" : "justify-start w-full leading-loose"
                 }`}
               >
                 <div
