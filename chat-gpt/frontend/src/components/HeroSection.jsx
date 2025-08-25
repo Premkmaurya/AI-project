@@ -6,15 +6,16 @@ import CircularText from './CircularText'
 import {useNavigate} from 'react-router-dom';
 import { MdArrowOutward } from "react-icons/md";
 import SplitText from "./SplitText";
-
 import gsap from 'gsap'
 
 function HeroSection() {
   const navigate = useNavigate()
   const btnRef = useRef(null)
   
+
   useEffect(()=>{
-    gsap.from(btnRef.current,{
+    const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+    tl.from(btnRef.current,{
       y:"-20%",
       opacity:0,
       scale:0,
@@ -32,7 +33,7 @@ function HeroSection() {
       <SplitText
         text="CHATGPT, CLONE!"
         className="text-5xl text-white font-semibold text-center"
-        delay={40}
+        delay={60}
         duration={2}
         ease="elastic.out(1,0.3)"
         splitType="chars"
@@ -46,6 +47,7 @@ function HeroSection() {
         text={["Future of Conversations, Today."]}
         typingSpeed={10}
         showCursor={true}
+        initialDelay={5000}
         cursorCharacter="|"
         reverseMode={false}
         className="text-xl"
@@ -55,7 +57,7 @@ function HeroSection() {
         typingSpeed={10}
         pauseDuration={100}
         showCursor={true}
-        initialDelay={500}
+        initialDelay={6000}
         cursorCharacter="|"
         reverseMode={false}
         className="text-xl"
@@ -65,12 +67,12 @@ function HeroSection() {
         typingSpeed={10}
         pauseDuration={100}
         showCursor={true}
-        initialDelay={700}
+        initialDelay={6500}
         cursorCharacter="|"
         reverseMode={false}
         className="text-xl"
       />
-      <button ref={btnRef} onClick={()=>navigate('/chat')} className="absolute z-3 bottom-[25%] flex items-center justify-between gap-2 shadow-xl/30 backdrop-blur-lg shadow-white/20 text-black border border-white/30 rounded-3xl text-white py-[0.6rem] px-4">Try it Now <MdArrowOutward /></button>
+      <button ref={btnRef} onClick={()=>document.cookie.includes('token')?navigate("/chat"):navigate("/login")} className="absolute z-3 bottom-[25%] flex items-center justify-between gap-2 shadow-xl/30 backdrop-blur-lg shadow-white/20 text-black border border-white/30 rounded-3xl text-white py-[0.6rem] px-4">Try it Now <MdArrowOutward /></button>
      </div>
     </div>
     <CircularText

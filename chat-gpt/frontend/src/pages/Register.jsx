@@ -38,7 +38,7 @@ export default function Register() {
     e.preventDefault();
     try{
        const user = await axios.post("http://localhost:3000/api/auth/register",formData,{ withCredentials: true })
-       navigate('/')
+       navigate('/chat')
     }catch(err){
        console.log("error is occured",err)
     }

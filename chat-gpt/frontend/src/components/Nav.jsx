@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import gpt from '../assets/gpt.png';
 import gsap from 'gsap'
-import {useRef,useEffect} from "React";
+import {useRef,useEffect} from "react";
 
 function Nav() {
   const navRef = useRef(null)
@@ -10,6 +10,7 @@ function Nav() {
     gsap.from(navRef.current,{
       y:"50%",
       opacity:0,
+      delay:4,
       duration:1.3,
       ease:"power2.out"
     })
@@ -21,7 +22,7 @@ function Nav() {
       <div className="flex items-center gap-5 text-md ">
         <Link to={'/'}>Home</Link>
         <Link to={'/signup'}>SignUp / <Link to={"/login"}>Login</Link></Link>
-        <Link to={'/chat'}><button className="text-black bg-white rounded-lg py-[0.47rem] px-4">Explore</button></Link>
+        <Link to={document.cookie.includes('token')?"/chat":"/login"}><button className="text-black bg-white rounded-lg py-[0.47rem] px-4">Explore</button></Link>
       </div>
     </div>
   </div>

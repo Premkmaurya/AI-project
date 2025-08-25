@@ -3,3 +3,15 @@
 *{
 	font-family: Lato;
 }
+.chat-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background: #303030;
+  border-radius: 4px;
+}
+
+.chat-box::-webkit-scrollbar-thumb:hover {
+  background: rgb(179, 178, 178)030;
+}

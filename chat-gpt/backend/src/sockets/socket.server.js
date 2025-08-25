@@ -7,14 +7,17 @@ const messageModel = require('../models/message.model')
 const {createMemory,queryMemory} =require('../services/vector.service')
 
 function setupSocketServer(httpServer) {
-	const io = new Server(httpServer,{});
+	const io = new Server(httpServer,{
+		cors:{
+          origin:"http://localhost:5173",
+          credentials:true
+     },
+	});
 
     io.use( async (socket,next)=>{
     	const getToken = cookie.parse(socket.handshake.headers.cookie || '')
-    	if (!getToken) {
-    		return res.status(400).json({
-    			message:"anautarised"
-    		})
+    	if (!getToken.token) {
+    		return new Error('unautharised.')
     	}
 
     	try{

@@ -1,16 +1,19 @@
 import {useRef,useEffect} from "react";
-import gsap from 'gsap'
 import Particle from "../components/Particle";
 import Nav from "../components/Nav";
-import gpt from '../assets/gpt.png'
 import HeroSection from "../components/HeroSection";
 import TextType from '../components/TextType'
+import gpt from '../assets/gpt.png'
+import gsap from 'gsap'
+
 
 function Home() {
-  const mainRef = useRef(null)
+  const mainRef = useRef(null) 
   const imgRef = useRef(null)
   const contentRef = useRef(null)
-  useEffect(() => {
+  const containerRef = useRef(null)
+
+  useEffect(()=>{
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     // Initial animations
@@ -31,16 +34,24 @@ function Home() {
         opacity: 0,
         scale: 0,
         duration: 1.5,
-        onComplete: ()=>{
-        mainRef.current.style.display = "none";
-        contentRef.current.style.display = "block";
-      }
     })
-}, []);
+    .set(mainRef.current,{
+      display:"none"
+    })
+    .set(containerRef.current,{
+      backgroundColor:"black",
+    })
+    .from(contentRef.current,{
+      y:"100%",
+      duration:1,
+      delay:-0.2,
+      ease:"ease.in",
+    })
+  },[]);
 
   return (
-    <div className="overflow-hidden bg-black">
-    <div ref={mainRef} className="bg-black w-[100vw] flex flex-col justify-center items-center h-[100vh]">
+    <div ref={containerRef}>
+    <div ref={mainRef} className="relative top-[0] bg-black w-[100vw] flex flex-col justify-center items-center h-[100vh]">
       <img className="w-[6rem] h-[8rem]" ref={imgRef} src={gpt} />
       <TextType 
         text={["Introducing To you, ChatGPT.",""]}
@@ -52,7 +63,8 @@ function Home() {
         deletingSpeed={10}
       />
     </div>
-    <div ref={contentRef} className="hidden absolute bg-black overflow-hidden w-screen h-screen">
+
+    <div ref={contentRef} className="relative bg-black overflow-hidden w-screen h-screen">
       <Nav />
       <HeroSection />
       <Particle

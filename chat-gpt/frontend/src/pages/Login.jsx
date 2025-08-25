@@ -19,7 +19,7 @@ const navigate = useNavigate()
     try{
        const user = await axios.post("http://localhost:3000/api/auth/login",formData,{ withCredentials: true })
        console.log(user)
-       navigate('/')
+       navigate('/chat')
     }catch(err){
        console.log("error is occured",err)
     }
