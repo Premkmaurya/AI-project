@@ -39,7 +39,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-       const user = await axios.post("http://localhost:3000/api/auth/register",formData,{ withCredentials: true })
+       const user = await axios.post("https://chatgpt-pd3e.onrender.com/api/auth/register",formData,{ withCredentials: true })
        toast.success('logged in.', {
           position: "top-right",
           autoClose: 2000,

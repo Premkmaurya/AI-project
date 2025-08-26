@@ -40,7 +40,7 @@ export default function App() {
   useEffect(() => {
     const fetchChats = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/chat", {
+        const response = await axios.get("https://chatgpt-pd3e.onrender.com/api/chat", {
           withCredentials: true,
         });
         const usersChats = (response.data.chat.title).reverse();
@@ -57,7 +57,7 @@ export default function App() {
     };
 
     fetchChats();
-    const socketInstance = io("http://localhost:3000", {
+    const socketInstance = io("https://chatgpt-pd3e.onrender.com", {
       withCredentials: true,
     });
     setSocket(socketInstance);
@@ -124,7 +124,7 @@ export default function App() {
     if (title.length) {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/chat",
+          "https://chatgpt-pd3e.onrender.com/api/chat",
           { title },
           { withCredentials: true }
         );
@@ -155,7 +155,7 @@ export default function App() {
   const getMessage = async (e) => {
     setActive(e)
     try{
-      const userMessages = await axios.get(`http://localhost:3000/api/message/${e}`,{
+      const userMessages = await axios.get(`https://chatgpt-pd3e.onrender.com/api/message/${e}`,{
         withCredentials:true
       })
       if (userMessages.data.chat) {
