@@ -32,11 +32,10 @@ export default function App() {
   const [socket, setSocket] = useState(null);
   const [isOpen, setIsOpen] = useState(true);
   const [chats, setChats] = useState([]);
-  const [active, setActive] = useState(false)
+  const [active, setActive] = useState()
+  const [messages, setMessages] = useState([]);  
 
-  const [messages, setMessages] = useState([
-    { text: "Hello! How can I help you?", sender: "ai" },
-  ]);
+
 
   useEffect(() => {
     const fetchChats = async () => {
@@ -44,17 +43,14 @@ export default function App() {
         const response = await axios.get("http://localhost:3000/api/chat", {
           withCredentials: true,
         });
-        const chats = (response.data.chat.title).reverse();
-        const chatData = chats.map(item=>{
+        const usersChats = (response.data.chat.title).reverse();
+        const chatData = usersChats.map(item=>{
               return {
                 id:item._id,
-                title:item.title
+                name:item.title
               }
         })
-       chatData.forEach(item=>{
-          setChats((prev) => [...prev, { id:item.id, name: item.title }]);
-          console.log(chats)
-        })
+          setChats(chatData)
       } catch (error) {
         console.error("Error fetching chats:", error);
       }
@@ -68,9 +64,13 @@ export default function App() {
 
     socketInstance.on("ai-response", (res) => {
       console.log(res);
-      setMessages((prev) => [...prev, { text: res.content, sender: "ai" }]);
+      setMessages((prev) => [...prev, { text: res.content, sender: "model" }]);
     });
   }, []);
+
+
+
+
 
   gsap.defaults({ duration: 0.5, ease: "power2.out" });
 
@@ -111,12 +111,10 @@ export default function App() {
     setIsOpen(!isOpen);
   };
 
+
+
   const createChatBoxHandler = () => {
     chatBoxRef.current.style.display = "block";
-    [sideBarRef, sendBtnRef, plusRef, inputRef].forEach(
-      (item) => (item.current.disabled = true)
-    );
-    containerRef.current.style.pointerEvents = "none";
     containerRef.current.style.filter = "blur(3px)";
   };
 
@@ -130,12 +128,11 @@ export default function App() {
           { title },
           { withCredentials: true }
         );
-        setChats([
-          ...chats,
+        setChats((prev)=>[
           {
             id: response.data.chat.id,
             name: title,
-          },
+          },...prev
         ]);
       } catch (err) {
         console.log(err);
@@ -146,20 +143,36 @@ export default function App() {
     }
 
     chatBoxRef.current.style.display = "none";
-    [sideBarRef, sendBtnRef, plusRef, inputRef].forEach(
-      item => item.current.disabled = false
-    );
-    containerRef.current.style.pointerEvent = "default";
     containerRef.current.style.filter = "blur(0px)";
   };
   const closeBtnHandler = () => {
     chatBoxRef.current.style.display = "none";
-    [sideBarRef, sendBtnRef, plusRef, inputRef].forEach(
-      item => item.current.disabled = false
-    );
-    containerRef.current.style.pointerEvents = "default";
     containerRef.current.style.filter = "blur(0px)";
   };
+
+
+
+  const getMessage = async (e) => {
+    setActive(e)
+    try{
+      const userMessages = await axios.get(`http://localhost:3000/api/message/${e}`,{
+        withCredentials:true
+      })
+      if (userMessages.data.chat) {
+           const newMessages = userMessages.data.chat.map(item => ({
+    text: item.content,
+    sender: item.role
+  }));
+  setMessages(newMessages);
+      } else {
+          setMessages([])
+      }
+    }catch(err){
+      console.log('error',err)
+    }
+  }
+
+
 
   const [newMessage, setNewMessage] = useState("");
 
@@ -168,7 +181,7 @@ export default function App() {
       setMessages((prev) => [...prev, { text: newMessage, sender: "user" }]);
 
       socket.emit("ai-message", {
-        chatId: "68ac0216d7cda3b0f16f1bb8",
+        chatId: "68ad37d6fecf2bf38d410024",
         content: newMessage,
       });
       setNewMessage("");
@@ -238,8 +251,8 @@ export default function App() {
             {chats.map((chat) => (
               <li
                 key={chat.id}
-                className={`p-2 rounded-md cursor-pointer hover:bg-[#303030] ${active ? 'active' : ''}`}
-                onClick={()=>setActive(true)}
+                className={`p-2 rounded-md cursor-pointer hover:bg-[#303030] ${active === chat.id ? 'active' : ''}`}
+                onClick={()=>getMessage(chat.id) }
               >
                 {chat.name}
               </li>

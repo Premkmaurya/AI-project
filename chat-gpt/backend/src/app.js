@@ -3,7 +3,8 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const authRoutes = require('./routes/auth.routes')
 const chatRoutes = require('./routes/chat.routes')
-const messageRoutes = require('./routes/message.routes')
+const authUser = require('./middleware/auth.user')
+const getMessages = require('./controllers/message.controller')
 
 const app = express();
 
@@ -18,6 +19,6 @@ app.use(express.json());
 
 app.use('/api/auth',authRoutes);
 app.use('/api/chat',chatRoutes);
-app.use("/api/message",messageRoutes)
+app.get("/api/message/:_id",authUser,getMessages)
 
 module.exports = app;

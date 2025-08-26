@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
 import axios from 'axios'
+import { toast } from 'react-toastify';
 
 
 function Login() {
@@ -19,6 +20,17 @@ const navigate = useNavigate()
     try{
        const user = await axios.post("http://localhost:3000/api/auth/login",formData,{ withCredentials: true })
        console.log(user)
+       toast.success('logged in.', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: "Flip",
+       });
        navigate('/chat')
     }catch(err){
        console.log("error is occured",err)

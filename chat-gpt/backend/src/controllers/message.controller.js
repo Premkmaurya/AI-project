@@ -1,19 +1,15 @@
-const chatModel = require("../models/chat.model.js")
+const messageModel = require("../models/message.model")
 
 const getMessages = async (req,res)=>{
-       const {id} = req.params.id;
+       const {_id} = req.params;
        const user= req.user;
-
-       const chat = await chatModel.find({
-         _id:id
-       })
-       console.log(chat)
+       
+       const chat = await messageModel.find({
+        chat:_id
+      })
        res.status(201).json({
-        message:'chat created successfully.',
-        chat:{
-          title:chat.title,
-          id:chat._id
-        }
+        message:'message find successfully.',
+        chat
        })
 
 }

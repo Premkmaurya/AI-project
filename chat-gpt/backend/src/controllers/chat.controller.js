@@ -23,7 +23,6 @@ const getChat = async (req,res)=>{
        const chat = await chatModel.find({
          user:user._id
        })
-       console.log(chat)
        res.status(201).json({
         message:'chat find successfully.',
         chat:{
