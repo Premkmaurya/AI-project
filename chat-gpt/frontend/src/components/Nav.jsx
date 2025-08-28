@@ -21,7 +21,7 @@ function Nav() {
       <img className="w-[3rem] h-[4rem]" src={gpt} />
       <div className="flex items-center gap-5 text-md ">
         <Link to={'/'}>Home</Link>
-        <Link to={'/signup'}>SignUp / <Link to={"/login"}>Login</Link></Link>
+        <Link to={'/register'}>SignUp / <Link to={"/login"}>Login</Link></Link>
         <Link to={document.cookie.includes('token')?"/chat":"/login"}><button className="text-black bg-white rounded-lg py-[0.47rem] px-4">Explore</button></Link>
       </div>
     </div>
