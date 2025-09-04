@@ -44,11 +44,13 @@ function Preview() {
   const { register, handleSubmit, reset } = useForm();
 
   const submitHandler = async (dets) => {
+    console.log(selectedOption,selectedOptionSec)
     const formData = new FormData();
-    formData.append("optFir",selectedOption)
-    formData.append("optSec",selectedOptionSec)
-    formData.append("image", captionFile);
-
+    formData.append("file", captionFile);
+    const options = {
+      optFir: selectedOption,
+      optSec: selectedOptionSec,
+    }
     try {
       setIsLoading(true);
       const caption = await axios.post(

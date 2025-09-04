@@ -8,10 +8,7 @@ import { toast } from "react-toastify";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import {AuthContext} from "../context/Context"
-import img1 from "../assets/img-1.jpg"
-import img2 from "../assets/img-2.avif"
-import img3 from "../assets/img-3.avif"
-import img4 from "../assets/img-4.webp"
+
 
 function Home() {
   const fileRef = useRef();
@@ -24,14 +21,7 @@ function Home() {
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
 
-  useEffect(() => {
-    if (!document.cookie.includes("token=")) {
-      const time = setTimeout(() => {
-        loginRef.current.classList.remove("hidden");
-        mainRef.current.classList.add("blur-sm");
-      }, 6000);
-    }
-  }, []);
+  
   useGSAP(() => {
     const tl = gsap.timeline();
     tl.to(imgRef.current, {
@@ -59,7 +49,6 @@ function Home() {
 
   const handleUploadClick = (dets) => {
     const file = dets.target.files[0];
-    console.log(file)
     navigate("/upload", { state: { file } });
   };
 

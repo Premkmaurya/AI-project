@@ -3,7 +3,7 @@ const { GoogleGenAI } =  require("@google/genai")
 
 const ai = new GoogleGenAI({});
 
-async function createCaption(optFir,optSec,imagePath) {
+async function createCaption(imagePath) {
  const contents = [
   {
     inlineData: {
@@ -11,7 +11,7 @@ async function createCaption(optFir,optSec,imagePath) {
       data: imagePath,
     },
   },
-  { text: "use" + optSec+ "language and " + "this tone"+ optFir + "Create the caption for this image.Caption should be short and consise most probably in one line.It should be according to isntagram or facebook.Don't explain the image generate create caption.Use popular hastag and emojis for the image,like #aesthetic,#instagram,#popular.Ex- Travel = peace of mind ❤️✨❤️..#mountains #travelvibes❤️ #trending" },
+  { text: "Caption should be short and consise most probably in one line.It should be according to isntagram or facebook.Don't explain the image generate create caption.Use popular hastag and emojis for the image,like #aesthetic,#instagram,#popular.Ex- Travel = peace of mind ❤️✨❤️..#mountains #travelvibes❤️ #trending" },
 ];
 
 const response = await ai.models.generateContent({
