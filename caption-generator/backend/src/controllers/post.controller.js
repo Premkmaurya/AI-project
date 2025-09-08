@@ -5,7 +5,6 @@ const { v4: uuidv4 } = require("uuid");
 
 const createPostController = async (req, res) => {
     const file = req.file;
-    console.log(req.body,req.file)
     const base64ImageData = new Buffer.from(file.buffer).toString("base64");
     const imageCaption = await createCaption(base64ImageData);
 

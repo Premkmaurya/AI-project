@@ -44,9 +44,8 @@ function Preview() {
   const { register, handleSubmit, reset } = useForm();
 
   const submitHandler = async (dets) => {
-    console.log(selectedOption,selectedOptionSec)
     const formData = new FormData();
-    formData.append("file", captionFile);
+    formData.append("image", captionFile);
     const options = {
       optFir: selectedOption,
       optSec: selectedOptionSec,
