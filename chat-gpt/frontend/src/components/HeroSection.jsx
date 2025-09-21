@@ -28,11 +28,11 @@ function HeroSection() {
   return (
     <>
     <div className="absolute flex justify-between items-center bg-transparent w-full h-full">
-     <div className="w-full flex flex-col gap-3 px-[3rem] justify-center items-center">
+     <div className="relative w-full flex flex-col gap-3 px-[3rem] justify-center items-center">
 
       <SplitText
         text="CHATGPT, CLONE!"
-        className="text-5xl text-white font-semibold text-center"
+        className="text-3xl sm:text-5xl text-white font-semibold text-center"
         delay={60}
         duration={2}
         ease="elastic.out(1,0.3)"
@@ -50,7 +50,7 @@ function HeroSection() {
         initialDelay={5000}
         cursorCharacter="|"
         reverseMode={false}
-        className="text-xl"
+        className="text-lg sm:text-xl"
       />
       <TextType 
         text={["Your personal AI that types,"]}
@@ -60,7 +60,7 @@ function HeroSection() {
         initialDelay={6000}
         cursorCharacter="|"
         reverseMode={false}
-        className="text-xl"
+        className="text-lg sm:text-xl"
       />
        <TextType 
         text={["thinks & vibes like you."]}
@@ -70,9 +70,9 @@ function HeroSection() {
         initialDelay={6500}
         cursorCharacter="|"
         reverseMode={false}
-        className="text-xl"
+        className="text-lg sm:text-xl"
       />
-      <button ref={btnRef} onClick={()=>document.cookie.includes('token')?navigate("/chat"):navigate("/login")} className="absolute z-3 bottom-[25%] flex items-center justify-between gap-2 shadow-xl/30 backdrop-blur-lg shadow-white/20 text-black border border-white/30 rounded-3xl text-white py-[0.6rem] px-4">Try it Now <MdArrowOutward /></button>
+      <button ref={btnRef} onClick={()=>document.cookie.includes('token')?navigate("/chat"):navigate("/login")} className="absolute z-3 -bottom-15 flex items-center justify-between gap-2 shadow-xl/30 backdrop-blur-lg shadow-white/20 border border-white/30 rounded-3xl text-white py-[0.6rem] px-4">Try it Now <MdArrowOutward /></button>
      </div>
     </div>
     <CircularText

@@ -1,6 +1,6 @@
 import {useRef,useEffect} from "react";
 import Particle from "../components/Particle";
-import Nav from "../components/Nav";
+import Nav from "../components/navbar/Nav";
 import HeroSection from "../components/HeroSection";
 import TextType from '../components/TextType'
 import gpt from '../assets/gpt.png'
@@ -66,6 +66,7 @@ function Home() {
 
     <div ref={contentRef} className="relative bg-black overflow-hidden w-screen h-screen">
       <Nav />
+      
       <HeroSection />
       <Particle
         particleColors={["#ffffff", "#ffffff"]}
