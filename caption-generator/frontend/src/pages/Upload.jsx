@@ -91,8 +91,8 @@ function Preview() {
 
   return (
     <div className="h-[88vh] mt-2 bg-white flex flex-col items-center justify-center relative px-4">
-      <div className="flex w-full h-[90%] justify-center items-start">
-        <div className="w-[50%] h-full flex items-start justify-center ">
+      <div className="flex flex-col sm:flex-row w-full h-[90%] justify-center items-start">
+        <div className="w-[100%] sm:w-[50%] overflow-hidden h-full flex items-start justify-center">
           <div className="w-[90%] h-[80%]">
             {previewImageurl && (
               <img
@@ -103,7 +103,7 @@ function Preview() {
             )}
           </div>
         </div>
-        <div className="w-[50%] h-full flex flex-col gap-4">
+        <div className="w-[100%] sm:w-[50%] h-full flex flex-col gap-4">
           <form
             onSubmit={handleSubmit(submitHandler)}
             className="flex w-full h-[10%] items-center gap-2 justify-between"
@@ -160,14 +160,14 @@ function Preview() {
               <LuSend size={17} />
             </button>
           </form>
-          <div className="border border-gray-400 px-4 overflow-y-auto py-3 rounded-lg text-gray-800 w-full h-[20%]">
+          <div className="border border-gray-400 px-4 overflow-y-auto py-3 rounded-lg text-black/90 font-semibold w-full max-h-[35%]">
             {isLoading ? (
               <div className="animate-pulse text-gray-500">Loading...</div>
             ) : (
               captionText
             )}
           </div>
-          <div className="flex w-full items-center text-gray-800">
+          <div className="flex w-full items-center text-black/90 font-semibold">
             <h3>Rate this caption?</h3>
             <div className="flex gap-5 ml-5 justify-center">
               <FaRegThumbsUp size={25} />

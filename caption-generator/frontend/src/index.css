@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
-*{
-    font-family: 'Helvatica', sans-serif;
+@font-face {
+    font-family: Snow;
+    src: url("/font/Silk.ttf") format("trueType");
+}
+* {
+    font-family: Snow, sans-serif;
+    letter-spacing: 0.2rem;
 }

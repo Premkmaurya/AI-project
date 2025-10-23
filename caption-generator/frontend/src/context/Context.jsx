@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const savedUser = document.cookie.includes("token=");
     if (savedUser) setUser(true);
-  }, []);
+  }, [user]);
 
   return (
     <AuthContext.Provider value={{ user, setUser }}>
