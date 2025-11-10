@@ -47,7 +47,7 @@ function Preview() {
     try {
       setIsLoading(true);
       const caption = await axios.post(
-        "http://localhost:3000/api/posts",
+        "https://ai-project-uho4.onrender.com/api/posts",
         formData,
         {
           withCredentials: true,
