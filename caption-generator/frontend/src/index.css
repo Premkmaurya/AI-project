@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: Snow;
-    src: url("/font/Silk.ttf") format("trueType");
+    src: url("/font/Silk.otf") format("opentype");
 }
 * {
     font-family: Snow, sans-serif;
@@ -12,11 +12,9 @@ input {
   font-family: 'Roboto', Arial, sans-serif; 
   /* Use your preferred font here. Always include fallbacks! */
   font-size: 16px; /* Important for accessibility and mobile tapping! */
-  color: #333; /* Good practice: ensure text is readable */
 }
 
 select,option {
   font-family: 'Roboto', Arial, sans-serif;
   font-size: 16px;
-  color: #333;
 }

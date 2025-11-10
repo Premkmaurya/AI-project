@@ -60,13 +60,13 @@ function Home() {
             <img
               ref={imgRef}
               className="w-full h-[90%] shadow-xl/30 object-cover rounded-tl-full rounded-br-full"
-              src="https://ik.imagekit.io/sk6swwncb/posts/dcf17697-0fc4-47c8-8d74-12f2d2359658_grjbQsFO1L?updatedAt=1754827386950"
+              src="/image/volleyball.avif"
               alt=""
             />
           </div>
           <div
             ref={captionRef}
-            className="border border-gray-400 -mt-[2rem] px-1 overflow-y-auto py-3 rounded-lg text-black/80 font-semibold hidden sm:block sm:w-full h-[10%]"
+            className="border border-gray-400 -mt-[2rem] px-1 overflow-y-auto py-3 rounded-lg text-black/90 font-black hidden sm:block sm:w-full h-[10%]"
           >
             {[
               ..."Transform pixels into caption with AI-powered captioning",
@@ -106,8 +106,8 @@ function Home() {
             Upload Image
           </button>
 
-          <p className="mt-4 text-gray-700 font-semibold">or drop a file.</p>
-          <p className="text-sm text-gray-500 font-semibold mt-12 max-w-md text-center">
+          <p className="mt-4 text-black/80 font-semibold">or drop a file.</p>
+          <p className="text-sm font-semibold mt-12 max-w-md text-center text-black/80">
             By uploading an image or URL you agree to our{" "}
             <a href="#" className="underline">
               Terms of Service
