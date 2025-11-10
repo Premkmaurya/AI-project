@@ -23,7 +23,7 @@ function Login() {
     if (isLoginView) {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/auth/login",
+          "https://ai-project-uho4.onrender.com/api/auth/login",
           data,
           { withCredentials: true }
         );
@@ -36,7 +36,7 @@ function Login() {
     } else {
       try {
         const response = await axios.post(
-          "http://localhost:3000/api/auth/register",
+          "https://ai-project-uho4.onrender.com/api/auth/register",
           data,
           { withCredentials: true }
         );
