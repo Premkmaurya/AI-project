@@ -22,8 +22,9 @@ async function registerController(req, res) {
   });
   const token = jwt.sign({ id: user._id }, process.env.JWT_KEY);
   res.cookie("token", token,{
-    sameSite:"none",
-    secure:true
+    httpOnly:true,
+    secure:true,
+    expireIn:360000 + Date.now(),
   });
   res.status(201).json({
     message: "user registered successfully.",
@@ -45,7 +46,11 @@ async function loginController(req, res) {
     return res.status(400).json({ message: "Password is incorrect." });
   }
   const token = jwt.sign({ id: user._id }, process.env.JWT_KEY);
-  res.cookie("token", token);
+  res.cookie("token", token,{
+    httpOnly:true,
+    secure:true,
+    expireIn:360000 + Date.now(),
+  });
   res.status(201).json({
     message: "user login successfully.",
     email: user.email,

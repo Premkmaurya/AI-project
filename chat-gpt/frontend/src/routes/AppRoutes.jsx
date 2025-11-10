@@ -14,9 +14,7 @@ function AppRoutes() {
       <Route
         path="/chat"
         element={
-          <ProtectedRoute>
             <Chat />
-          </ProtectedRoute>
         }
       />
       <Route

@@ -23,7 +23,7 @@ async function registerUser(req,res) {
 		password:hashPassword
 	})
 
-    const token = await jwt.sign({id:user._id},process.env.JWT_SECRET)
+    const token = jwt.sign({id:user._id},process.env.JWT_SECRET)
 
     res.cookie('token',token);
 

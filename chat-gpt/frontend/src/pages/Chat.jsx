@@ -40,7 +40,7 @@ export default function App() {
   useEffect(() => {
     const fetchChats = async () => {
       try {
-        const response = await axios.get("https://chatgpt-pd3e.onrender.com/api/chat", {
+        const response = await axios.get("http://localhost:3000/api/chat", {
           withCredentials: true,
         });
         const usersChats = (response.data.chat.title).reverse();
@@ -57,7 +57,7 @@ export default function App() {
     };
 
     fetchChats();
-    const socketInstance = io("https://chatgpt-pd3e.onrender.com", {
+    const socketInstance = io("http://localhost:3000", {
       withCredentials: true,
     });
     setSocket(socketInstance);
@@ -124,7 +124,7 @@ export default function App() {
     if (title.length) {
       try {
         const response = await axios.post(
-          "https://chatgpt-pd3e.onrender.com/api/chat",
+          "http://localhost:3000/api/chat",
           { title },
           { withCredentials: true }
         );
@@ -155,7 +155,7 @@ export default function App() {
   const getMessage = async (e) => {
     setActive(e)
     try{
-      const userMessages = await axios.get(`https://chatgpt-pd3e.onrender.com/api/message/${e}`,{
+      const userMessages = await axios.get(`http://localhost:3000/api/message/${e}`,{
         withCredentials:true
       })
       if (userMessages.data.chat) {
@@ -205,7 +205,7 @@ export default function App() {
     <>
       <div
         ref={chatBoxRef}
-        className="hidden absolute z-3 text-white flex flex-col items-center rounded-lg px-4 py-2 bg-[#303030] top-[30%] left-[35%] translate-[-35%,-30%] w-[35%] h-[34%]">
+        className="absolute z-3 text-white flex flex-col items-center rounded-lg px-4 py-2 bg-[#303030] top-[30%] left-[35%] translate-[-35%,-30%] w-[35%] h-[34%]">
         <span
           onClick={closeBtnHandler}
           className="absolute text-white w-7 flex justify-center items-center rounded-full h-7 bg-[#303030] -right-8 -top-4"

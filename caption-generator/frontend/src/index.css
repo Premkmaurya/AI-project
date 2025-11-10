@@ -8,3 +8,15 @@
     font-family: Snow, sans-serif;
     letter-spacing: 0.2rem;
 }
+input {
+  font-family: 'Roboto', Arial, sans-serif; 
+  /* Use your preferred font here. Always include fallbacks! */
+  font-size: 16px; /* Important for accessibility and mobile tapping! */
+  color: #333; /* Good practice: ensure text is readable */
+}
+
+select,option {
+  font-family: 'Roboto', Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}

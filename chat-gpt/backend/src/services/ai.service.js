@@ -109,7 +109,7 @@ async function createVector(content) {
         contents: { 
           parts: [{ text: content }] 
         },
-        outputDimensionality: 768,
+         outputDimensionality: 768,
     });
     
     

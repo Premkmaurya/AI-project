@@ -69,7 +69,6 @@ export default function Register() {
     try{
        const user = await axios.post("https://chatgpt-pd3e.onrender.com/api/auth/register",formData,{ withCredentials: true })
        toast.success('registered successfully.');
-       toast.success('logged in.');
        navigate('/chat')
        setSubmitClick(false)
     }catch(err){
@@ -148,7 +147,7 @@ export default function Register() {
                 <div className="coco bg-white rounded-full w-2 h-2"></div>
                 <div className="coco bg-white rounded-full w-2 h-2"></div>
               </div>
-              <div className="text-center w-full h-full relative top-0 text-center flex items-center justify-center z-2">
+              <div className="w-full h-full relative top-0 text-center flex items-center justify-center z-2">
                 <h3>Register</h3>
               </div>
             </button>
